@@ -2,15 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateCoordinatesDTO } from './dto/create-coordinates.dto';
 import { Model } from 'mongoose';
-import { RiderCoordinatesDocument } from './schemas/rider-coordinates.schema';
+import { RiderCoordinate } from './schemas/rider-coordinates.schema';
 
 @Injectable()
 export class RiderCoordinatesService {
   constructor(
     @InjectModel(RiderCoordinatesService.name)
-    private readonly riderCoordinateModel: Model<RiderCoordinatesDocument>,
+    private readonly riderCoordinateModel: Model<RiderCoordinate>,
   ) {}
-  saveRiderCoordinates(createCoordinateDTO: CreateCoordinatesDTO) {
-    return this.riderCoordinateModel.create(createCoordinateDTO);
+  async getRiderCoordinates() {
+    return await this.riderCoordinateModel.find();
+  }
+  async saveRiderCoordinates(createCoordinateDTO: CreateCoordinatesDTO) {
+    return await this.riderCoordinateModel.create(createCoordinateDTO);
   }
 }
