@@ -7,8 +7,8 @@ import { RiderCoordinate } from './schemas/rider-coordinates.schema';
 @Injectable()
 export class RiderCoordinatesService {
   constructor(
-    @InjectModel(RiderCoordinatesService.name)
-    private readonly riderCoordinateModel: Model<RiderCoordinate>,
+    @InjectModel(RiderCoordinate.name)
+    private riderCoordinateModel: Model<RiderCoordinate>,
   ) {}
   async getRiderCoordinates() {
     return await this.riderCoordinateModel.find();
